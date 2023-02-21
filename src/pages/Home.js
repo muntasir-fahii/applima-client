@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import ProjectCard from "../components/ProjectCard";
 
 const Home = () => {
   const [projects, setProjects] = useState([]);
@@ -31,11 +32,11 @@ const Home = () => {
         >
           All Projects
         </h2>
-        <div className="projects-wrapper">
+        <div className="projects-wrapper flex gap-10 flex-wrap">
           {projects &&
-            projects.map((project) => {
-              <p key={project._id}>{project.title}</p>;
-            })}
+            projects.map((project) => (
+              <ProjectCard key={project._id} project={project} />
+            ))}
         </div>
       </div>
       <div className="right"></div>
