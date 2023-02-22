@@ -1,4 +1,21 @@
+import { useProjectsContext } from "../hooks/useProjectsContext";
+
 const ProjectCard = ({ project }) => {
+  const { dispatch } = useProjectsContext();
+
+  const handleDelete = async () => {
+    const res = await fetch(
+      `http://localhost:5000/api/projects/${project._id}`,
+      {
+        method: "DELETE",
+      }
+    );
+    const json = await res.json();
+
+    if (res.ok) {
+      dispatch({ type: "DELETE_PROJECT", payload: json });
+    }
+  };
   return (
     <div className="project bg-neutral-800 p-5 rounded-xl shadow-xl border border-neutral-700 flex flex-col gap-5 w-[30rem] ">
       <div className="top">
@@ -28,7 +45,10 @@ const ProjectCard = ({ project }) => {
         <button className="bg-pink-600 text-pink-100 py-2 px-5 rounded-xl hover:bg-pink-50 hover:text-pink-900 duration-300">
           Update
         </button>
-        <button className="text-pink-700 hover:underline duration-300">
+        <button
+          className="text-pink-700 hover:underline duration-300"
+          onClick={handleDelete}
+        >
           Delete
         </button>
       </div>
