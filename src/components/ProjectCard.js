@@ -1,6 +1,6 @@
 const ProjectCard = ({ project }) => {
   return (
-    <div className="project bg-neutral-800 p-5 rounded-xl shadow-xl border border-neutral-700 flex flex-col gap-5 w-[30rem]">
+    <div className="project bg-neutral-800 p-5 rounded-xl shadow-xl border border-neutral-700 flex flex-col gap-5 w-[30rem] ">
       <div className="top">
         <span className="text-pink-600">{project._id}</span>
         <h3 className="text-3xl font-medium ">{project.title}</h3>
@@ -28,7 +28,7 @@ const ProjectCard = ({ project }) => {
         <button className="bg-pink-600 text-pink-100 py-2 px-5 rounded-xl hover:bg-pink-50 hover:text-pink-900 duration-300">
           Update
         </button>
-        <button className="hover:text-pink-500 hover:underline duration-300">
+        <button className="text-pink-700 hover:underline duration-300">
           Delete
         </button>
       </div>
