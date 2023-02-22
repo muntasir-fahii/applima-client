@@ -1,28 +1,23 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import ProjectCard from "../components/ProjectCard";
 import Projectfrom from "../components/Projectfrom";
-
+import { useProjectsContext } from "../hooks/useProjectsContext";
 const Home = () => {
-  const [projects, setProjects] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const { projects, dispatch } = useProjectsContext();
 
   useEffect(() => {
-    const getProjects = async () => {
-      try {
-        setLoading(true);
-        const res = await fetch("http://localhost:5000/api/projects");
-        if (!res.ok) throw new Error("Something went wrong");
-        const data = await res.json();
-        setProjects(data);
-        setLoading(false);
-      } catch (err) {
-        setError(err.message);
-        setLoading(false);
+    const getAllProjects = async () => {
+      const res = await fetch("http://localhost:5000/api/projects");
+      const json = await res.json();
+
+      if (res.ok) {
+        dispatch({ type: "SET_PROJECTS", payload: json });
       }
     };
-    getProjects();
-  }, []);
+
+    getAllProjects();
+  }, [dispatch]);
+
   return (
     <div className="home container mx-auto py-20 grid grid-cols-3 gap-10">
       <div className="left col-span-2">
