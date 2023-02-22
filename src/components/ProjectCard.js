@@ -1,4 +1,5 @@
 import { useProjectsContext } from "../hooks/useProjectsContext";
+import moment from "moment";
 
 const ProjectCard = ({ project }) => {
   const { dispatch } = useProjectsContext();
@@ -29,8 +30,12 @@ const ProjectCard = ({ project }) => {
       <div className="mid text-slate-300 flex gap-10">
         <div className="left flex flex-col">
           <span>Budget: {project.budget}</span>
-          <span>Added on: {project.createdAt}</span>
-          <span>Updated: {project.updatedAt}</span>
+          <span>
+            Added on: {moment(project.createdAt).format("DD MMM YYYY, hh:mm A")}
+          </span>
+          <span>
+            Updated: {moment(project.updatedAt).format("DD MMM YYYY, hh:mm A")}
+          </span>
         </div>
         <div className="right flex flex-col">
           <span>Manager: {project.manager}</span>

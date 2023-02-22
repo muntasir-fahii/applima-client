@@ -9,6 +9,7 @@ const Projectfrom = () => {
   const [manager, setManager] = useState("");
   const [dev, setDev] = useState("");
   const [error, setError] = useState(null);
+  const [emptyFields, setEmptyFields] = useState([]);
 
   const { dispatch } = useProjectsContext();
 
@@ -31,6 +32,7 @@ const Projectfrom = () => {
     //!res.ok, set error
     if (!res.ok) {
       setError(json.error);
+      setEmptyFields(json.emptyFields);
     }
 
     //res.ok, reset
@@ -42,6 +44,7 @@ const Projectfrom = () => {
       setManager("");
       setDev("");
       setError(null);
+      setEmptyFields([]);
       dispatch({ type: "CREATE_PROJECT", payload: json });
     }
   };
@@ -68,7 +71,11 @@ const Projectfrom = () => {
           type="text"
           placeholder="e.g. e-commerce website"
           id="title"
-          className="bg-transparent border border-slate-500 py-3 px-5 rounded-lg outline-none focus:border-pink-400 duration-300"
+          className={`bg-transparent border border-slate-500 py-3 px-5 rounded-lg outline-none focus:border-pink-400 duration-300 ${
+            emptyFields.includes("title")
+              ? "border-rose-500"
+              : "border-slate-500"
+          }`}
         />
       </div>
 
@@ -85,7 +92,11 @@ const Projectfrom = () => {
           type="text"
           placeholder="e.g. node.js, react, redux"
           id="tech"
-          className="bg-transparent border border-slate-500 py-3 px-5 rounded-lg outline-none focus:border-pink-400 duration-300"
+          className={`bg-transparent border border-slate-500 py-3 px-5 rounded-lg outline-none focus:border-pink-400 duration-300 ${
+            emptyFields.includes("tech")
+              ? "border-rose-500"
+              : "border-slate-500"
+          }`}
         />
       </div>
 
@@ -102,7 +113,11 @@ const Projectfrom = () => {
           type="number"
           placeholder="e.g. 500"
           id="budget"
-          className="bg-transparent border border-slate-500 py-3 px-5 rounded-lg outline-none focus:border-pink-400 duration-300"
+          className={`bg-transparent border border-slate-500 py-3 px-5 rounded-lg outline-none focus:border-pink-400 duration-300 ${
+            emptyFields.includes("budget")
+              ? "border-rose-500"
+              : "border-slate-500"
+          }`}
         />
       </div>
 
@@ -119,7 +134,11 @@ const Projectfrom = () => {
           type="number"
           placeholder="e.g. 4"
           id="duration"
-          className="bg-transparent border border-slate-500 py-3 px-5 rounded-lg outline-none focus:border-pink-400 duration-300"
+          className={`bg-transparent border border-slate-500 py-3 px-5 rounded-lg outline-none focus:border-pink-400 duration-300 ${
+            emptyFields.includes("duration")
+              ? "border-rose-500"
+              : "border-slate-500"
+          }`}
         />
       </div>
 
@@ -136,7 +155,11 @@ const Projectfrom = () => {
           type="text"
           placeholder="e.g. muntasir"
           id="manager"
-          className="bg-transparent border border-slate-500 py-3 px-5 rounded-lg outline-none focus:border-pink-400 duration-300"
+          className={`bg-transparent border border-slate-500 py-3 px-5 rounded-lg outline-none focus:border-pink-400 duration-300 ${
+            emptyFields.includes("manager")
+              ? "border-rose-500"
+              : "border-slate-500"
+          }`}
         />
       </div>
 
@@ -153,7 +176,9 @@ const Projectfrom = () => {
           type="number"
           placeholder="e.g. 5"
           id="developers"
-          className="bg-transparent border border-slate-500 py-3 px-5 rounded-lg outline-none focus:border-pink-400 duration-300"
+          className={`bg-transparent border border-slate-500 py-3 px-5 rounded-lg outline-none focus:border-pink-400 duration-300 ${
+            emptyFields.includes("dev") ? "border-rose-500" : "border-slate-500"
+          }`}
         />
       </div>
       <button
