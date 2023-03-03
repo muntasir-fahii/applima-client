@@ -8,8 +8,10 @@ export const projectReducer = (state, action) => {
   switch (action.type) {
     case "SET_PROJECTS":
       return { ...state, projects: action.payload };
+
     case "CREATE_PROJECT":
       return { ...state, projects: [action.payload, ...state.projects] };
+
     case "DELETE_PROJECT":
       return {
         ...state,
@@ -17,6 +19,7 @@ export const projectReducer = (state, action) => {
           (project) => project._id !== action.payload._id
         ),
       };
+
     case "UPDATE_PROJECT":
       const [existingproject] = state.projects.filter(
         (project) => project._id === action.payload._id
