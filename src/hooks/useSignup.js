@@ -11,35 +11,35 @@ export const useSignup = () => {
     setLoading(true);
     setError(null);
 
-    const res = await fetch(`${process.env.REACT_APP_BASE_URL}/user/signup`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    });
+    const res = await fetch(
+      `${process.env.REACT_APP_BASE_URL}/api/user/signup`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      }
+    );
 
     const json = await res.json();
 
-    //res.ok === flase
+    // res.ok === false
     if (!res.ok) {
       setLoading(false);
       setError(json.error);
     }
-    //res.ok === true
+
+    // res.ok === true
     if (res.ok) {
-      //update auth context
+      // update auth context
       dispatch({ type: "LOGIN", payload: json });
-      //save user to localstorage
+      // save user to local storage
       localStorage.setItem("user", JSON.stringify(json));
 
       setLoading(false);
     }
   };
 
-  return {
-    signup,
-    error,
-    loading,
-  };
+  return { signup, error, loading };
 };
